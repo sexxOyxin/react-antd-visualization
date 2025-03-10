@@ -30,7 +30,11 @@ Vercel：
 ### 数据来源【暂定...
 上海市公共数据开放平台：https://data.sh.gov.cn/
 疫情api：https://disease.sh/docs/
-
+Echarts：
+图表1 - 上海过去7天天气：https://open-meteo.com/
+图表2 - 人口最多的10个国家：https://restcountries.com/
+图表3 - 中国疫情分布地图：https://disease.sh
+图表4 - 
 
 ### 项目基础搭建：
 前提：要安装node哦，Vite 本身也是依赖 Node.js 的，所以也需要安装好 Node 环境，并且 Vite 要求 Node 的版本要大于等于 12 版本。
@@ -69,5 +73,12 @@ git config --get user.email
 
 ### 进入正题
 #### 项目文件结构确定
+
+
+#### step
+基于antd的menu做导航开发，用到routes，navigate。
+1、创建route中的路由
+2、新增nav中的代码
+3、app中注册
 
 
