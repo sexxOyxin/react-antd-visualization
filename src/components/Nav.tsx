@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const Nav = () => {
   const navigate = useNavigate();
 
-  const [current, setCurrent] = useState('/echarts');
+  const curLocation = window.location.pathname || '';
+  const [current, setCurrent] = useState(curLocation);
 
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
@@ -22,18 +23,27 @@ const Nav = () => {
       children: [
         {
           type: 'group',
-          label: 'Item 1',
+          label: 'S2',
           children: [
-            { label: 'Option 1', key: 'setting:1' },
-            { label: 'Option 2', key: 'setting:2' },
+            { label: 'Table', key: '/setting:1' },
           ],
         },
         {
           type: 'group',
-          label: 'Item 2',
+          label: 'G2',
           children: [
-            { label: 'Option 3', key: 'setting:3' },
-            { label: 'Option 4', key: 'setting:4' },
+            { label: 'BarChart', key: '/setting:2' },
+            { label: 'LineChart', key: '/setting:3' },
+            { label: 'PieChart', key: '/setting:4' },
+            { label: 'WordCloud', key: '/setting:5' },
+          ],
+        },
+        {
+          type: 'group',
+          label: 'G6',
+          children: [
+            { label: 'BasicGraph', key: '/setting:6' },
+            { label: 'TreeGraph', key: '/setting:7' },
           ],
         },
       ],
