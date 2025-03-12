@@ -71,6 +71,10 @@ git config user.email "your_email@example.com"
 git config --get user.name
 git config --get user.email
 
+其他技巧：
+撤回上一条commit并保留修改：git reset --soft HEAD~1
+
+
 ### 进入正题
 #### 项目文件结构确定
 

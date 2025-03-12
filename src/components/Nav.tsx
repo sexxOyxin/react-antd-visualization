@@ -1,14 +1,14 @@
 import { BarChartOutlined, HeartOutlined, LineChartOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Nav = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const curLocation = window.location.pathname || '';
-  const [current, setCurrent] = useState(curLocation);
-
+  const [current, setCurrent] = useState(location.pathname);
+  console.log('navvvvvlocation: ', location.pathname);
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
     setCurrent(e.key);
