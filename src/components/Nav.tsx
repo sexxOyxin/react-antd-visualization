@@ -8,7 +8,6 @@ const Nav = () => {
   const location = useLocation();
 
   const [current, setCurrent] = useState(location.pathname);
-  console.log('navvvvvlocation: ', location.pathname);
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
     setCurrent(e.key);
