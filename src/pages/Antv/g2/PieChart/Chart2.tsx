@@ -7,9 +7,8 @@ export default function Chart2() {
   const initChart = () => {
     const chart = new Chart({
       container: 'container2',
-      height: 640,
+      height: 450,
       padding: 0,
-      inset: 50,
     });
 
     chart.coordinate({ type: 'theta', innerRadius: 0.6 });

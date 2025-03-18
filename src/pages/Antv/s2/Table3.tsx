@@ -1,7 +1,76 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { S2DataConfig, S2Options, TableSheet } from '@antv/s2';
 
 export default function Table3() {
+  const tableRef = useRef(null);
+  const initTable = () => {
+    fetch('https://assets.antv.antgroup.com/s2/basic-table-mode.json')
+      .then((res) => res.json())
+      .then(async (data) => {
+        const container = document.getElementById('container3');
+        const s2DataConfig: S2DataConfig = {
+          fields: {
+            columns: ['province', 'city', 'type', 'price', 'cost'],
+          },
+          meta: [
+            {
+              field: 'province',
+              name: '省份',
+            },
+            {
+              field: 'city',
+              name: '城市',
+            },
+            {
+              field: 'type',
+              name: '商品类别',
+            },
+            {
+              field: 'price',
+              name: '价格',
+            },
+            {
+              field: 'cost',
+              name: '成本',
+            },
+          ],
+          data,
+        };
+
+        const s2Options: S2Options = {
+          width: 800,
+          height: 812,
+          seriesNumber: {
+            enable: true,
+            text: '序号',
+          },
+          placeholder: {
+            // 自定义空数据单元格占位符
+            cell: '-',
+            // cell: (meta) => '-',
+            // 自定义空数据占位符: 文本,图标的大小和间距可以通过主题配置修改 https://s2.antv.antgroup.com/api/general/s2-theme#empty
+            empty: {
+              /**
+               * 自定义 Icon, 支持 customSVGIcons 自定义注册和内置的 Icon
+               * @see https://s2.antv.antgroup.com/manual/advanced/custom/custom-icon
+               */
+              icon: 'Empty',
+              description: '暂无数据',
+            },
+          },
+        };
+
+        const s2 = new TableSheet(container, s2DataConfig, s2Options);
+
+        await s2.render();
+      });
+  };
+
+  useEffect(() => {
+    initTable();
+  }, []);
+
   return (
-    <div>基础明细表</div>
+    <div id='container3' ref={tableRef}></div>
   )
 }

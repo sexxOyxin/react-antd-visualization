@@ -10,8 +10,9 @@ const AntvLineChart = lazy(() => import('../pages/Antv/g2/LineChart'));
 const AntvBarChart = lazy(() => import('../pages/Antv/g2/BarChart'));
 const AntvPieChart = lazy(() => import('../pages/Antv/g2/PieChart'));
 const AntvWordCloud = lazy(() => import('../pages/Antv/g2/WordCloud'));
-const AntvBasicGraph = lazy(() => import('../pages/Antv/g6/BasicGraph'));
+const AntvFlowGraph = lazy(() => import('../pages/Antv/g6/FlowGraph'));
 const AntvTreeGraph = lazy(() => import('../pages/Antv/g6/TreeGraph'));
+const AntvRelationGraph = lazy(() => import('../pages/Antv/g6/RelationGraph'));
 
 const  RouterConfig = () => {
     return (
@@ -24,8 +25,9 @@ const  RouterConfig = () => {
                 <Route path="/setting:3" element={<AntvLineChart />}></Route>
                 <Route path="/setting:4" element={<AntvPieChart />}></Route>
                 <Route path="/setting:5" element={<AntvWordCloud />}></Route>
-                <Route path="/setting:6" element={<AntvBasicGraph />}></Route>
+                <Route path="/setting:6" element={<AntvFlowGraph />}></Route>
                 <Route path="/setting:7" element={<AntvTreeGraph />}></Route>
+                <Route path="/setting:8" element={<AntvRelationGraph />}></Route>
                 <Route path="/threejs" element={<ThreejsPage />}></Route>
             </Routes>
         </Suspense>

@@ -41,8 +41,9 @@ const Nav = () => {
           type: 'group',
           label: 'G6',
           children: [
-            { label: 'BasicGraph', key: '/setting:6' },
+            { label: 'FlowGraph', key: '/setting:6' },
             { label: 'TreeGraph', key: '/setting:7' },
+            { label: 'RelationGraph', key: '/setting:8' },
           ],
         },
       ],
