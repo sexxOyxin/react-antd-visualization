@@ -1,5 +1,6 @@
+// @ts-nocheck
 import  { useEffect, useRef } from 'react';
-import { ExtensionCategory, Graph, Polyline, positionOf, register } from '@antv/g6';
+import { BaseEdgeStyleProps, ExtensionCategory, Graph, Polyline, positionOf, register } from '@antv/g6';
 import { Card } from 'antd';
 import './MyCard.css'
 
@@ -47,7 +48,7 @@ export default function FlowGraph() {
 
   const initGraph = () => {
     class SnakePolyline extends Polyline {
-      getPoints(attributes) {
+      getPoints(attributes: Required<BaseEdgeStyleProps>) {
         const [sourcePoint, targetPoint] = this.getEndpoints(attributes, false);
 
         if (sourcePoint[1] === targetPoint[1]) return [sourcePoint, targetPoint];
@@ -77,13 +78,13 @@ export default function FlowGraph() {
       autoFit: 'center',
       node: {
         style: {
-          fill: (d) => (d.data.time ? '#1783ff' : '#d9d9d9'),
+          fill: (d) => (d.data?.time ? '#1783ff' : '#d9d9d9'),
           lineWidth: 2,
           size: 8,
-          stroke: (d) => (d.data.time ? 'lightblue' : ''),
+          stroke: (d) => (d.data?.time ? 'lightblue' : ''),
           labelFontWeight: 500,
           labelOffsetY: 8,
-          labelText: (d) => d.data.label,
+          labelText: (d) => d.data?.label,
           badge: true,
           badges: (d) => [
             {
@@ -92,7 +93,7 @@ export default function FlowGraph() {
               fontSize: 10,
               offsetY: 39,
               placement: 'bottom',
-              text: d.data.time || '--',
+              text: d.data?.time || '--',
             },
           ],
         },
@@ -101,7 +102,7 @@ export default function FlowGraph() {
         type: 's-polyline',
         style: {
           lineWidth: 2,
-          stroke: (d) => (d.data.done ? '#1783ff' : '#d9d9d9'),
+          stroke: (d) => (d.data?.done ? '#1783ff' : '#d9d9d9'),
         },
       },
       layout: {

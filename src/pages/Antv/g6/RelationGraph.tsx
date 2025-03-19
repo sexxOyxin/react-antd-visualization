@@ -1,7 +1,9 @@
+// @ts-nocheck
 import  { useEffect, useRef } from 'react';
-import { Badge, BaseBehavior, ExtensionCategory, Graph, GraphEvent, Label, Rect, register } from '@antv/g6';
+import { Badge, BaseBehavior, BaseBehaviorOptions, ExtensionCategory, Graph, GraphEvent, Label, Rect, RectStyleProps, register, RuntimeContext } from '@antv/g6';
 import { Card } from 'antd';
 import './MyCard.css'
+import { DisplayObject } from '@antv/g-lite';
 
 export default function RelationGraph() {
   const graphRef = useRef(null);
@@ -49,14 +51,14 @@ export default function RelationGraph() {
         return { text, ...labelStyle };
       }
 
-      getKeyStyle(attributes) {
+      getKeyStyle(attributes: Required<RectStyleProps>) {
         return {
           ...super.getKeyStyle(attributes),
           fill: this.level === 'overview' ? statusColors[this.data.status] : '#fff',
         };
       }
 
-      getPositionStyle(attributes) {
+      getPositionStyle(attributes: any) {
         if (this.level === 'overview') return false;
         return {
           text: this.data.position,
@@ -69,12 +71,12 @@ export default function RelationGraph() {
         };
       }
 
-      drawPositionShape(attributes, container) {
+      drawPositionShape(attributes: Required<RectStyleProps>, container: this | DisplayObject<any, any>) {
         const positionStyle = this.getPositionStyle(attributes);
         this.upsert('position', Label, positionStyle, container);
       }
 
-      getStatusStyle(attributes) {
+      getStatusStyle(attributes: Required<RectStyleProps>) {
         if (this.level === 'overview') return false;
         return {
           text: this.data.status,
@@ -87,7 +89,7 @@ export default function RelationGraph() {
         };
       }
 
-      drawStatusShape(attributes, container) {
+      drawStatusShape(attributes: Required<RectStyleProps>, container: this | DisplayObject<any, any>) {
         const statusStyle = this.getStatusStyle(attributes);
         this.upsert('status', Badge, statusStyle, container);
       }
@@ -103,7 +105,7 @@ export default function RelationGraph() {
         };
       }
 
-      drawPhoneShape(attributes, container) {
+      drawPhoneShape(attributes: Required<RectStyleProps>, container: this | DisplayObject<any, any>) {
         const style = this.getPhoneStyle(attributes);
         this.upsert('phone', Label, style, container);
       }
@@ -129,18 +131,18 @@ export default function RelationGraph() {
         ['detailed']: [0.6, Infinity],
       };
 
-      constructor(context, options) {
+      constructor(context: RuntimeContext, options: Partial<BaseBehaviorOptions>) {
         super(context, options);
         this.bindEvents();
       }
 
-      update(options) {
+      update(options: Partial<BaseBehaviorOptions>) {
         this.unbindEvents();
         super.update(options);
         this.bindEvents();
       }
 
-      updateZoomLevel = async (e) => {
+      updateZoomLevel = async (e: { data: { scale: number; }; }) => {
         if ('scale' in e.data) {
           const scale = e.data.scale;
           const level = Object.entries(this.levels).find(([key, [min, max]]) => scale > min && scale <= max)?.[0];

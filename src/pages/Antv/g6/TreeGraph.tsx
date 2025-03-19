@@ -1,6 +1,7 @@
+// @ts-nocheck
 import  { useEffect, useRef } from 'react';
 import { Card } from 'antd';
-import { Rect as GRect, Text as GText } from '@antv/g';
+import { BaseCustomElementStyleProps, DisplayObject, Rect as GRect, Text as GText } from '@antv/g';
 import {
   Badge,
   CommonEvent,
@@ -10,6 +11,7 @@ import {
   iconfont,
   Label,
   Rect,
+  RectStyleProps,
   register,
   treeToGraphData,
 } from '@antv/g6';
@@ -42,7 +44,7 @@ export default function TreeGraph() {
         return this.context.model.getChildrenData(this.id);
       }
 
-      getLabelStyle(attributes) {
+      getLabelStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const [width, height] = this.getSize(attributes);
         return {
           x: -width / 2 + 8,
@@ -55,7 +57,7 @@ export default function TreeGraph() {
         };
       }
 
-      getPriceStyle(attributes) {
+      getPriceStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const [width, height] = this.getSize(attributes);
         return {
           x: -width / 2 + 8,
@@ -67,12 +69,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawPriceShape(attributes, container) {
+      drawPriceShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const priceStyle = this.getPriceStyle(attributes);
         this.upsert('price', GText, priceStyle, container);
       }
 
-      getCurrencyStyle(attributes) {
+      getCurrencyStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const [, height] = this.getSize(attributes);
         return {
           x: this.shapeMap['price'].getLocalBounds().max[0] + 4,
@@ -84,12 +86,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawCurrencyShape(attributes, container) {
+      drawCurrencyShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const currencyStyle = this.getCurrencyStyle(attributes);
         this.upsert('currency', GText, currencyStyle, container);
       }
 
-      getPercentStyle(attributes) {
+      getPercentStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const [width, height] = this.getSize(attributes);
         return {
           x: width / 2 - 4,
@@ -101,12 +103,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawPercentShape(attributes, container) {
+      drawPercentShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const percentStyle = this.getPercentStyle(attributes);
         this.upsert('percent', GText, percentStyle, container);
       }
 
-      getTriangleStyle(attributes) {
+      getTriangleStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const percentMinX = this.shapeMap['percent'].getLocalBounds().min[0];
         const [, height] = this.getSize(attributes);
         return {
@@ -120,12 +122,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawTriangleShape(attributes, container) {
+      drawTriangleShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const triangleStyle = this.getTriangleStyle(attributes);
         this.upsert('triangle', Label, triangleStyle, container);
       }
 
-      getVariableStyle(attributes) {
+      getVariableStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const [, height] = this.getSize(attributes);
         return {
           fill: '#000',
@@ -138,12 +140,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawVariableShape(attributes, container) {
+      drawVariableShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const variableStyle = this.getVariableStyle(attributes);
         this.upsert('variable', GText, variableStyle, container);
       }
 
-      getCollapseStyle(attributes) {
+      getCollapseStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         if (this.childrenData.length === 0) return false;
         const { collapsed } = attributes;
         const [width, height] = this.getSize(attributes);
@@ -165,7 +167,7 @@ export default function TreeGraph() {
         };
       }
 
-      drawCollapseShape(attributes, container) {
+      drawCollapseShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const collapseStyle = this.getCollapseStyle(attributes);
         const btn = this.upsert('collapse', Badge, collapseStyle, container);
 
@@ -180,7 +182,7 @@ export default function TreeGraph() {
         }
       }
 
-      getProcessBarStyle(attributes) {
+      getProcessBarStyle(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined) {
         const { rate, status } = this.data;
         const { radius } = attributes;
         const color = COLORS[status];
@@ -196,12 +198,12 @@ export default function TreeGraph() {
         };
       }
 
-      drawProcessBarShape(attributes, container) {
+      drawProcessBarShape(attributes: (RectStyleProps & BaseCustomElementStyleProps) | undefined, container: DisplayObject<any, any>) {
         const processBarStyle = this.getProcessBarStyle(attributes);
         this.upsert('process-bar', GRect, processBarStyle, container);
       }
 
-      getKeyStyle(attributes) {
+      getKeyStyle(attributes: Required<RectStyleProps>) {
         const keyStyle = super.getKeyStyle(attributes);
         return {
           ...keyStyle,

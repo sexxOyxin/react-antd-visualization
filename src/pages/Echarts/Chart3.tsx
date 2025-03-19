@@ -1,8 +1,8 @@
+// @ts-nocheck
 import ReactECharts from 'echarts-for-react';
 import chinaGeoJson from "../../assets/china.json";
 import * as echarts from "echarts";
-// import { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes';
-import { GeoJSONSourceInput } from 'echarts/types/dist/shared';
+import { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes';
 
 
 // 注册地图

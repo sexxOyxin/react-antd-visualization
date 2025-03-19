@@ -48,7 +48,7 @@ export default function Chart2() {
       .scale('y', {
         nice: true,
       })
-      .axis('y', { labelFormatter: (d) => d + '°C' });
+      .axis('y', { labelFormatter: (d: string) => d + '°C' });
 
     chart.line().encode('shape', 'smooth');
 
