@@ -26,13 +26,13 @@ const Chart1 = () => {
 
   const getOption = () => ({
     title: { text: "上海过去 7 天气温趋势" },
-    tooltip: { trigger: "axis" },
+    tooltip: { trigger: "axis" as 'axis' },
     legend: { data: ["最高温度", "最低温度"] },
-    xAxis: { type: "category", data: chartData.dates },
-    yAxis: { type: "value", axisLabel: { formatter: "{value}°C" } },
+    xAxis: { type: "category" as 'category', data: chartData.dates },
+    yAxis: { type: "value" as 'value', axisLabel: { formatter: "{value}°C" } },
     series: [
-      { name: "最高温度", type: "line", data: chartData.maxTemp, color: "red" },
-      { name: "最低温度", type: "line", data: chartData.minTemp, color: "blue" },
+      { name: "最高温度", type: "line" as 'line', data: chartData.maxTemp, color: "red" },
+      { name: "最低温度", type: "line" as 'line', data: chartData.minTemp, color: "blue" },
     ],
   });
 

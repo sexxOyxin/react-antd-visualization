@@ -26,14 +26,14 @@ const Chart2 = () => {
 
   const getOption = () => ({
     title: { text: "全球人口最多的 10 个国家" },
-    tooltip: { trigger: "axis" },
+    tooltip: { trigger: "axis" as 'axis' },
     xAxis: {
-      type: "category", data: chartData.countries, axisLabel: {
+      type: "category" as 'category', data: chartData.countries, axisLabel: {
         interval: 0 // 0 表示所有标签都显示，不间隔
       }
     },
     yAxis: {
-      type: "value",
+      type: "value" as 'value',
       axisLabel: {
         formatter: (value: number) => {
           if (value >= 1000000000) {
@@ -41,14 +41,14 @@ const Chart2 = () => {
           } else if (value >= 10000) {
             return value/10000 + '万';
           }
-          return value;
+          return value.toString();
         }
       }
     },
     series: [
       {
         name: "人口数量",
-        type: "bar",
+        type: "bar" as 'bar',
         data: chartData.populations,
         color: "#73C0DE",
       },

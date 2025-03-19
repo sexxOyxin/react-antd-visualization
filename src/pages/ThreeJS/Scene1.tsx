@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three';
 
 export default function Scene1() {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -11,7 +11,7 @@ export default function Scene1() {
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
+    mountRef.current?.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -32,7 +32,7 @@ export default function Scene1() {
     // 组件卸载时清理
     return () => {
       renderer.dispose();
-      mountRef.current.removeChild(renderer.domElement);
+      mountRef.current?.removeChild(renderer.domElement);
     };
   }, []);
 

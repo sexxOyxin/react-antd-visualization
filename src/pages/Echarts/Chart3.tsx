@@ -1,10 +1,52 @@
 import ReactECharts from 'echarts-for-react';
 import chinaGeoJson from "../../assets/china.json";
 import * as echarts from "echarts";
+// import { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes';
+import { GeoJSONSourceInput } from 'echarts/types/dist/shared';
+
 
 // 注册地图
-echarts.registerMap("china", chinaGeoJson);
+echarts.registerMap("china", chinaGeoJson as GeoJSONSourceInput);
 
+
+const data = [
+  {
+    name: '上海市',
+    value: 140
+  },
+  {
+    name: '北京市',
+    value: 88
+  },
+  {
+    name: '天津市',
+    value: 141
+  },
+  {
+    name: '河北省',
+    value: 111
+  },
+  {
+    name: '内蒙古自治区',
+    value: 22
+  },
+  {
+    name: '吉林省',
+    value: 33
+  },
+  {
+    name: '安徽省',
+    value: 44
+  },
+  {
+    name: '江西省',
+    value: 55
+  },
+  {
+    name: '湖北省',
+    value: 66
+  },
+];
 const Chart3 = () => {
   const option = {
     title: {
@@ -13,7 +55,7 @@ const Chart3 = () => {
       left: 'center',
     },
     tooltip: {
-      trigger: 'item',
+      trigger: 'item' as "item",
     },
     visualMap: {
       min: 0,
@@ -29,19 +71,13 @@ const Chart3 = () => {
     series: [
       {
         name: '疫情确认',
-        type: 'map',
-        mapType: 'china',
+        type: "map" as 'map',
+        map: 'china',
         roam: true,
         label: {
           show: false,
         },
-        data: [{
-          name: '上海市',
-          value: 10
-      }, {
-          name: '北京市',
-          value: 20
-      }],
+        data,
       },
     ],
   };

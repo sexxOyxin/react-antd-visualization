@@ -10,7 +10,7 @@ export default function Chart4() {
       containLabel: true
     },
     xAxis: {
-      type: "value",
+      type: "value" as 'value',
       scale: true,
       axisLabel: {
         formatter: "{value} cm"
@@ -20,7 +20,7 @@ export default function Chart4() {
       }
     },
     yAxis: {
-      type: "value",
+      type: "value" as 'value',
       scale: true,
       axisLabel: {
         formatter: "{value} kg"
@@ -31,7 +31,7 @@ export default function Chart4() {
     },
     series: [{
       name: "Male",
-      type: "scatter",
+      type: "scatter" as 'scatter',
       data: [
         [174, 65.6],
         [175.3, 71.8],

@@ -1,47 +1,19 @@
-你的 `onPressEnter` 事件处理函数的 `e` 参数类型不符合 `KeyboardEventHandler<HTMLInputElement>` 的要求。React 事件对象的 `target` 类型是 `EventTarget`，而 `EventTarget` 本身没有 `value` 属性，因此 TypeScript 报错。
+interface RegisteredSeriesOption {
+  line: LineSeriesOption$1;
+}
+declare type Values<T> = T[keyof T];
+declare type SeriesOption$1 = Values<RegisteredSeriesOption>;
+interface EChartsOption extends ECBasicOption {
+  series?: SeriesOption$1 | SeriesOption$1[];
+}
 
-### 解决方案：
-你可以使用 `React.KeyboardEvent<HTMLInputElement>` 作为 `e` 的类型，并正确地断言 `target` 为 `HTMLInputElement`，这样 TypeScript 才会知道 `target.value` 存在。
 
-#### ✅ 正确写法：
-```tsx
-import React, { useState } from 'react';
-import { Input } from 'antd';
+type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+declare type RegisterMapParams = Parameters<typeof _default$1.registerMap>;
+declare function registerMap(mapName: RegisterMapParams[0], geoJson: RegisterMapParams[1], specialAreas?: RegisterMapParams[2]): void;
 
-const MyComponent = () => {
-  const [words, setWords] = useState<{ text: string; value: number }[]>([]);
 
-  const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const curValue = e.currentTarget.value.trim(); // `currentTarget` 确保是 `HTMLInputElement`
-    
-    if (!curValue) return; // 避免空字符串
 
-    setWords((prev) =>
-      prev.some((w) => w.text === curValue)
-        ? prev.map((w) => (w.text === curValue ? { ...w, value: w.value + 1 } : w))
-        : [...prev, { text: curValue, value: 1 }]
-    );
-
-    e.currentTarget.value = ''; // 清空输入框
-  };
-
-  return (
-    <Input placeholder="输入关键词后回车..." onPressEnter={onPressEnter} />
-  );
-};
-
-export default MyComponent;
-```
-
-### **解释**
-1. **`e: React.KeyboardEvent<HTMLInputElement>`**  
-   - `onPressEnter` 需要的是 `KeyboardEventHandler<HTMLInputElement>`，所以 `e` 的类型应为 `React.KeyboardEvent<HTMLInputElement>`。
-   
-2. **使用 `e.currentTarget.value` 代替 `e.target.value`**  
-   - `currentTarget` 在 React 事件中始终指向绑定事件的元素（即 `Input`），所以它的类型是 `HTMLInputElement`，确保 `value` 存在。
-   - `target` 可能是子元素，导致 `EventTarget` 没有 `value`，从而报错。
-
-3. **`trim()` 处理输入值，避免空字符串**  
-   - 预防误操作导致的无意义数据。
-
-这样写后，TS 识别不会报错，同时保证 `value` 类型正确，代码也更加健壮。
+import type { GeoJSONSourceInput } from 'echarts/types/src/coord/geo/geoTypes'
+这个类型引入路径报错如下，如何解决，我确定有这个文件。【另外想问下，为什么要这样做
+Cannot find module 'echarts/types/src/coord/geo/geoTypes' or its corresponding type declarations.ts(2307)
