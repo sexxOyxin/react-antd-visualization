@@ -1,7 +1,4 @@
-// CovidMap.tsx
-import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
-import { getCovidData } from '../../api/covid19';
 import chinaGeoJson from "../../assets/china.json";
 import * as echarts from "echarts";
 

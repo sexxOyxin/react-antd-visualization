@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { S2DataConfig, S2Options, TableSheet } from '@antv/s2';
 
 export default function Table3() {
@@ -7,7 +7,7 @@ export default function Table3() {
     fetch('https://assets.antv.antgroup.com/s2/basic-table-mode.json')
       .then((res) => res.json())
       .then(async (data) => {
-        const container = document.getElementById('container3');
+        const container = document.getElementById('container3') as HTMLElement;
         const s2DataConfig: S2DataConfig = {
           fields: {
             columns: ['province', 'city', 'type', 'price', 'cost'],

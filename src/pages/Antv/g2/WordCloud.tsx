@@ -1,5 +1,4 @@
-import { Card, Col, Row } from 'antd'
-import React from 'react'
+import { Col, Row } from 'antd'
 import InputCom from './WordCloud/InputCom'
 
 

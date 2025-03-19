@@ -1,5 +1,4 @@
 import { Card, Col, Row } from 'antd'
-import React from 'react'
 import { Chart1, Chart2, Chart3, Chart4 } from './LineChart/index'
 
 export default function LineChart() {
@@ -7,7 +6,6 @@ export default function LineChart() {
     <div>
       <br></br>
       <Row gutter={[16,16]}>
-        {/* https://g2.antv.antgroup.com/zh/examples/general/line/#line-connect-nulls */}
         <Col span={12}><Card title='基础折线图'><Chart1 /></Card></Col>
         <Col span={12}><Card title='曲线折线图'><Chart2 /></Card></Col>
         <Col span={12}><Card title='阶梯折线图'><Chart3 /></Card></Col>

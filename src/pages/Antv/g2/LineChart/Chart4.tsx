@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2'
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 export default function Chart4() {
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef(null);
 
   const initChart = () => {
 
@@ -21,7 +21,7 @@ export default function Chart4() {
           // Mock missing data.
           {
             type: 'map',
-            callback: (d) => ({
+            callback: (d: { date: { getUTCMonth: () => number; }; close: unknown; }) => ({
               ...d,
               close: d.date.getUTCMonth() < 3 ? NaN : d.close,
             }),

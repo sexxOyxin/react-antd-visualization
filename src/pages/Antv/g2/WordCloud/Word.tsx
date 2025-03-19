@@ -1,12 +1,12 @@
 import { Chart } from '@antv/g2';
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 interface WordProps {
     props: { text: string; value: number}[];
 }
 
 export default function Word({props} : WordProps) {
-    const chartRef = useRef<Chart | null>(null);
+    const chartRef = useRef(null);
     const initChart = () => {
         const chart = new Chart({
             container: 'container',

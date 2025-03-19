@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2'
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 export default function Chart2() {
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef(null);
 
   const initChart = () => {
     const chart = new Chart({
@@ -32,7 +32,6 @@ export default function Chart2() {
     chart
       .text()
       .style('text', 'Donut')
-      // Relative position
       .style('x', '50%')
       .style('y', '50%')
       .style('fontSize', 40)
@@ -42,7 +41,6 @@ export default function Chart2() {
     chart
       .text()
       .style('text', 'chart')
-      // Absolute position
       .style('x', 640 / 2 - 16)
       .style('y', 360)
       .style('fontSize', 20)

@@ -55,9 +55,9 @@ const InputCom = () => {
   };
 
   // 处理输入后enter事件
-  const onPressEnter = (e: { target: any; }) => {
-    const { target } = e;
-    const curValue = target.value;
+  const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { currentTarget } = e;
+    const curValue = currentTarget.value.trim();
     if (words.find((w) => w.text === curValue)) {
       setWords((prev) =>
         prev.map((w) =>
@@ -67,7 +67,7 @@ const InputCom = () => {
     } else {
       setWords((prev) => [...prev, { text: curValue, value: 1 }]);
     }
-    target.value = '';
+    currentTarget.value = '';
   };
 
   return (

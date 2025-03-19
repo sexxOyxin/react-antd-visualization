@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2'
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 export default function Chart3() {
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef(null);
 
   const data = [
     { month: 'Jan', value: 51 },

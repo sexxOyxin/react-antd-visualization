@@ -1,5 +1,4 @@
 import { Card, Col, Row } from 'antd'
-import React from 'react'
 import { Chart1, Chart2, Chart3 } from './PieChart/index'
 
 export default function PieChart() {

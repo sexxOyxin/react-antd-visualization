@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { Card } from 'antd';
 import { Rect as GRect, Text as GText } from '@antv/g';
 import {

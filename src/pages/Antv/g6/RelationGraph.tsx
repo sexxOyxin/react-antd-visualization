@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { Badge, BaseBehavior, ExtensionCategory, Graph, GraphEvent, Label, Rect, register } from '@antv/g6';
 import { Card } from 'antd';
 import './MyCard.css'

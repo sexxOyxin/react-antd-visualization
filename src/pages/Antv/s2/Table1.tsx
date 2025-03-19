@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { PivotSheet, S2Options } from '@antv/s2';
 
 export default function Table1() {
@@ -10,7 +10,7 @@ export default function Table1() {
     )
       .then((res) => res.json())
       .then(async (dataCfg) => {
-        const container = document.getElementById('container1');
+        const container = document.getElementById('container1') as HTMLElement;
         const s2DataConfig = {
           ...dataCfg,
           meta: [
@@ -36,10 +36,6 @@ export default function Table1() {
             {
               field: 'number',
               name: '数量',
-              // 自定义格式化
-              // formatter: (value, record, meta) => {
-              //   return `${value / 100} %`;
-              // },
             },
           ],
         };
@@ -48,7 +44,6 @@ export default function Table1() {
           width: 800,
           height: 350,
           hierarchyType: 'grid',
-          // 数值挂行头时, 自定义角头虚拟数值字段文本, 默认 "数值"
           cornerExtraFieldText: '自定义',
           interaction: {
             copy: {

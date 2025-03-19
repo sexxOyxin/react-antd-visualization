@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Row, Col } from 'antd'
 import Chart1 from './BarChart/Chart1'
 import Chart2 from './BarChart/Chart2'

@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 const data = [
     { name: 'London', 月份: 'Jan.', 月均降雨量: 18.9 },
@@ -21,7 +21,7 @@ const data = [
 ];
 
 export default function Chart1() {
-    const chartRef = useRef<Chart | null>(null);
+    const chartRef = useRef(null);
 
     const initChart = () => {
         const chart = new Chart({

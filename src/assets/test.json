@@ -1,72 +1,47 @@
-import { PivotSheet, S2Options } from '@antv/s2';
+你的 `onPressEnter` 事件处理函数的 `e` 参数类型不符合 `KeyboardEventHandler<HTMLInputElement>` 的要求。React 事件对象的 `target` 类型是 `EventTarget`，而 `EventTarget` 本身没有 `value` 属性，因此 TypeScript 报错。
 
-fetch(
-  'https://gw.alipayobjects.com/os/bmw-prod/2a5dbbc8-d0a7-4d02-b7c9-34f6ca63cff6.json',
-)
-  .then((res) => res.json())
-  .then(async (dataCfg) => {
-    const container = document.getElementById('container');
-    const s2DataConfig = {
-      ...dataCfg,
-      meta: [
-        // 支持批量设置或正则匹配
-        // field: ['province', 'city'],
-        // field: /type/,
-        {
-          field: 'province',
-          name: '省份',
-        },
-        {
-          field: 'city',
-          name: '城市',
-        },
-        {
-          field: 'type',
-          name: '商品类别',
-        },
-        {
-          field: 'sub_type',
-          name: '子类别',
-        },
-        {
-          field: 'number',
-          name: '数量',
-          // 自定义格式化
-          // formatter: (value, record, meta) => {
-          //   return `${value / 100} %`;
-          // },
-        },
-      ],
-    };
+### 解决方案：
+你可以使用 `React.KeyboardEvent<HTMLInputElement>` 作为 `e` 的类型，并正确地断言 `target` 为 `HTMLInputElement`，这样 TypeScript 才会知道 `target.value` 存在。
 
-    const s2Options: S2Options = {
-      width: 600,
-      height: 480,
-      hierarchyType: 'grid',
-      // 数值挂行头时, 自定义角头虚拟数值字段文本, 默认 "数值"
-      cornerExtraFieldText: '自定义',
-      interaction: {
-        copy: {
-          enable: true,
-          withFormat: true,
-          withHeader: true,
-        },
-      },
-      // 显示序号
-      // seriesNumber: {
-      //   enable: true,
-      //   自定义序号列文本, 默认 "序号"
-      //   text: '自定义序号标题',
-      // },
-      frozen: {
-        // 默认冻结行头, 行头和数值区域都会展示滚动条
-        // rowHeader: false,
-        // 冻结行头时, 行头宽度占表格的 1/2, 支持动态调整 (0 - 1)
-        // rowHeader: 0.2,
-      },
-    };
+#### ✅ 正确写法：
+```tsx
+import React, { useState } from 'react';
+import { Input } from 'antd';
 
-    const s2 = new PivotSheet(container, s2DataConfig, s2Options);
+const MyComponent = () => {
+  const [words, setWords] = useState<{ text: string; value: number }[]>([]);
 
-    await s2.render();
-  });
+  const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const curValue = e.currentTarget.value.trim(); // `currentTarget` 确保是 `HTMLInputElement`
+    
+    if (!curValue) return; // 避免空字符串
+
+    setWords((prev) =>
+      prev.some((w) => w.text === curValue)
+        ? prev.map((w) => (w.text === curValue ? { ...w, value: w.value + 1 } : w))
+        : [...prev, { text: curValue, value: 1 }]
+    );
+
+    e.currentTarget.value = ''; // 清空输入框
+  };
+
+  return (
+    <Input placeholder="输入关键词后回车..." onPressEnter={onPressEnter} />
+  );
+};
+
+export default MyComponent;
+```
+
+### **解释**
+1. **`e: React.KeyboardEvent<HTMLInputElement>`**  
+   - `onPressEnter` 需要的是 `KeyboardEventHandler<HTMLInputElement>`，所以 `e` 的类型应为 `React.KeyboardEvent<HTMLInputElement>`。
+   
+2. **使用 `e.currentTarget.value` 代替 `e.target.value`**  
+   - `currentTarget` 在 React 事件中始终指向绑定事件的元素（即 `Input`），所以它的类型是 `HTMLInputElement`，确保 `value` 存在。
+   - `target` 可能是子元素，导致 `EventTarget` 没有 `value`，从而报错。
+
+3. **`trim()` 处理输入值，避免空字符串**  
+   - 预防误操作导致的无意义数据。
+
+这样写后，TS 识别不会报错，同时保证 `value` 类型正确，代码也更加健壮。

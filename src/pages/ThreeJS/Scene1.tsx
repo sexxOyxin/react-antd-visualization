@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three';
 
 export default function Scene1() {
-  const mountRef = useRef<HTMLDivElement>(null);
+  const mountRef = useRef(null);
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -32,7 +32,7 @@ export default function Scene1() {
     // 组件卸载时清理
     return () => {
       renderer.dispose();
-      mountRef.current?.removeChild(renderer.domElement);
+      mountRef.current.removeChild(renderer.domElement);
     };
   }, []);
 

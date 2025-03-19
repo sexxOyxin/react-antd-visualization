@@ -134,3 +134,9 @@ Echarts - 展示四个图表 - 使用Card包裹 - 其中的某些图可用接口
 Antv - 分类别展示 - G2、G6、S2
 
 Three - 大致展示一下
+
+### Vercel部署
+
+1、参考教程
+
+```https://juejin.cn/post/7143067114025254919```

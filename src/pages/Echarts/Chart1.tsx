@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import { getWeatherData } from "../../api/weather";
 
 const Chart1 = () => {
-  const [chartData, setChartData] = useState({ dates: [], maxTemp: [], minTemp: [] });
+  const [chartData, setChartData] = useState<{ dates: string[]; maxTemp: number[]; minTemp: number[] }>({
+    dates: [],
+    maxTemp: [],
+    minTemp: [],
+  });
+
+  // const [chartData, setChartData] = useState({ dates: string[], maxTemp: [], minTemp: [] });
 
   useEffect(() => {
     getWeatherData()

@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2'
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 export default function Chart3() {
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef(null);
 
   const initChart = () => {
     const chart = new Chart({
@@ -32,7 +32,7 @@ export default function Chart3() {
       })
       .label({ text: 'name', fontSize: 10, fontWeight: 'bold' })
       .label({
-        text: (d, i, data) => (i < data.length - 3 ? d.value : ''),
+        text: (d: { value: unknown }, i: number, data: string) => (i < data.length - 3 ? d.value : ''),
         fontSize: 9,
         dy: 12,
       })

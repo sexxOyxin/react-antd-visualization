@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { PivotSheet, S2Options } from '@antv/s2';
 
 export default function Table2() {
@@ -9,7 +9,7 @@ export default function Table2() {
     )
       .then((res) => res.json())
       .then(async (dataCfg) => {
-        const container = document.getElementById('container2');
+        const container = document.getElementById('container2') as HTMLElement;
 
         const s2Options: S2Options = {
           width: 800,
