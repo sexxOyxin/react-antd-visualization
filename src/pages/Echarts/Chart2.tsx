@@ -10,7 +10,7 @@ const Chart2 = () => {
       .then((res) => {
         if (!res.data || res.data.length === 0) return;
 
-        // 过滤出人口最多的前10个国家
+        // 过滤出Europe人口最多的前10个国家
         const sortedData = res.data
           .filter((country: { population: unknown; }) => country.population) // 确保有数据
           .sort((a: { population: number; }, b: { population: number; }) => b.population - a.population) // 按人口降序排序
@@ -25,7 +25,7 @@ const Chart2 = () => {
   }, []);
 
   const getOption = () => ({
-    title: { text: "全球人口最多的 10 个国家" },
+    title: { text: "欧洲人口最多的 10 个国家" },
     tooltip: { trigger: "axis" as 'axis' },
     xAxis: {
       type: "category" as 'category', data: chartData.countries, axisLabel: {
